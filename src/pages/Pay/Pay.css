@@ -1,0 +1,76 @@
+.pay-container{
+    min-height: 60vh;
+    height: auto;
+    width: 90vw;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+@media (max-width:900px) {
+.pay-container{
+    min-height: 40vh;
+}
+}
+
+@media (max-width:462px) {
+    .pay-container{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.billing-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 40%;  /* keep remember this to change next   */
+}
+@media (max-width:462px) {
+    .billing-container{
+        width: 90%;
+    }
+}
+.billing-container h1{
+    font-size: 22px;
+    font-weight: 500;
+    
+}
+.billing-container div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.billing-container p{
+    font-size: 17px;
+}
+.billing-container hr{
+    color: gray;
+}
+.or{
+    color: gray;
+    font-weight: 500;
+    font-size: 20px;
+}
+@media (max-width:562px) {
+    .or{
+        font-size: 15px;
+    }
+}
+.qr-container{
+    width: 40%;  /*keep remeber this */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.qr-container p{
+    font-weight: 400;
+    font-size: 20px;
+}
