@@ -19,12 +19,25 @@ const MenuItems = () => {
               <div className="add-cross-container">
                 {cartItems[item._id] ? (
                   <div className="add-cross-active">
-                    <img onClick={()=>removeFromCart(item._id)}  src={assets.remove_icon_red} alt="" />
+                    <img
+                      onClick={() => removeFromCart(item._id)}
+                      src={assets.remove_icon_red}
+                      alt=""
+                    />
                     <p>{cartItems[item._id]}</p>
-                    <img onClick={()=>addTocart(item._id)} src={assets.add_icon_green} alt="" />
+                    <img
+                      onClick={() => addTocart(item._id)}
+                      src={assets.add_icon_green}
+                      alt=""
+                    />
                   </div>
                 ) : (
-                  <img className="add-btn" onClick={()=>addTocart(item._id)} src={assets.add_icon_white} alt="" />
+                  <img
+                    className="add-btn"
+                    onClick={() => addTocart(item._id)}
+                    src={assets.add_icon_white}
+                    alt=""
+                  />
                 )}
               </div>
               <div className="menu-items-name-rating">

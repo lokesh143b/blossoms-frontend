@@ -18,8 +18,7 @@ const Home = () => {
           <span>m</span>
           <span>s</span>
           <span>.</span>
-        </div>&nbsp;
-        Restuarent
+        </div>&nbsp;Restuarent
       </h1>
       <Category />
       <hr />

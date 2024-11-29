@@ -16,8 +16,9 @@
 }
 .cart-items-title {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: 1fr 1.5fr 1fr 1.5fr 1fr 1fr;
   align-items: center;
+  gap: 5px;
 }
 @media (max-width:375px) {
   .cart-items-title p{
@@ -26,8 +27,10 @@
 }
 .cart-quantity{
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   gap: 3px;
+  
 }
 .cart-items-item {
   margin: 10px 0;

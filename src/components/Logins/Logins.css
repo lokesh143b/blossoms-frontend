@@ -1,0 +1,134 @@
+.logins-container {
+  min-height: 50vh;
+  height: auto;
+  width: 40vw;
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.pop-up-cross{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #000000;
+  cursor: pointer;
+}
+.light-mode .pop-up-cross{
+  color: #ffffff;
+}
+.light-mode .logins-container {
+  background-color: #2e2a2a;
+}
+.light-mode .logins-container h1 {
+  color: #ffffff;
+}
+.light-mode .logins-container label {
+  color: #ffffff;
+}
+.light-mode .login-card p{
+  color: #ffffff;
+}
+.login-card {
+  border: 1px solid gray;
+  padding: 20px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 80%;
+}
+@media (min-width: 2200px) {
+  .logins-container {
+    height: 40vh;
+    width: 40vw;
+  }
+}
+@media (max-width: 1024px) and (min-width: 968px) {
+  .login-card {
+    height: 95%;
+  }
+}
+.login-card h1 {
+  font-size: 20px;
+}
+
+.login-card div {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-card div label {
+  color: #000000;
+  font-weight: 600;
+  font-size: 16px;
+}
+.login-card p {
+  font-size: 13px;
+  align-self: flex-start;
+  font-weight: 600;
+  cursor: pointer;
+}
+.login-card span {
+  color: blue;
+}
+@media (max-width: 672px) {
+  .logins-container {
+    height: auto;
+    width: auto;
+  }
+  .login-card {
+    height: 40vh;
+    border: none;
+  }
+  .login-card h1 {
+    font-size: 15px;
+  }
+  .login-card div label {
+    font-size: 12px;
+  }
+  .login-card p {
+    font-size: 10px;
+  }
+}
+
+.login-card div input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid gray;
+}
+.login-card div input::placeholder {
+  color: gray;
+  font-size: 15px;
+  font-weight: 500;
+}
+.login-card button {
+  background-color: skyblue;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+}
+
+@media (max-width: 568px) {
+  .login-card div input::placeholder {
+    font-size: 12px;
+  }
+}
+
+.close-pop-up{
+  display: none;
+}
+

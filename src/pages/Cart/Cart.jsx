@@ -8,15 +8,29 @@ import { CiCirclePlus } from "react-icons/ci";
 
 const Cart = () => {
   const {
-    foodItems,
     cartItems,
+    setCartItems,
     addTocart,
     removeFromCart,
     removeItemFromCart,
     food_list,
     getTotalAmount,
+    setOrders,
   } = useContext(MyContext);
   const navigate = useNavigate();
+
+  const onClickOrderNow = () => {
+    if (getTotalAmount() > 0) {
+      for(let [itemId,quantity] of Object.entries(cartItems)){
+        const filteredItems = food_list.filter((each) => each._id === itemId);
+        const updatedItem = { ...filteredItems[0], quantity };
+        setOrders((prev) => ([...prev , updatedItem]))
+        setCartItems({})
+      }
+      return navigate("/orders");
+    }
+    alert("No items in your cart");
+  };
 
   return (
     <div className="cart-container">
@@ -99,9 +113,7 @@ const Cart = () => {
                 : getTotalAmount()}
             </p>
           </div>
-          <button onClick={() => getTotalAmount()>0? navigate("/orders"):alert("No items in your cart")}>
-            PROCEED TO CHECKOUT
-          </button>
+          <button onClick={onClickOrderNow}>ORDER NOW</button>
         </div>
         {/* ---------promo code-------- */}
         <div className="cart-promocode">

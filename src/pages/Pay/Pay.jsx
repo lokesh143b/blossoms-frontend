@@ -4,15 +4,14 @@ import { MyContext } from "../../context/MyContext";
 import { QRCodeSVG } from "qrcode.react";
 
 const Pay = () => {
-  const { getTotalAmount } = useContext(MyContext);
+  const { orderTotal } = useContext(MyContext);
 
   const UPI_ID = "6303300378@ybl";
   const payeeName = "Blossoms Restuarent";
   const transactionAmount =
-    getTotalAmount() > 500
-      ? Math.round(((getTotalAmount() * 18) / 100 + getTotalAmount()) * 100) /
-        100
-      : getTotalAmount();
+    orderTotal() > 500
+      ? Math.round(((orderTotal() * 18) / 100 + orderTotal()) * 100) / 100
+      : orderTotal();
   const currency = "INR";
 
   const upiURL = `upi://pay?pa=${UPI_ID}&pn=${payeeName}&am=${transactionAmount}&cu=${currency}`;
@@ -23,22 +22,21 @@ const Pay = () => {
       <div className="billing-container">
         <h1>Billing details</h1>
         <div>
-          <p>Subtotal :</p> <p>₹ {getTotalAmount()}</p>
+          <p>Subtotal :</p> <p>₹ {orderTotal()}</p>
         </div>
         <div>
-          <p>GST {getTotalAmount() > 500 ? 18 : 0}% :</p>{" "}
-          <p>₹ {getTotalAmount() > 500 ? (getTotalAmount() * 18) / 100 : 0}</p>
+          <p>GST {orderTotal() > 500 ? 18 : 0}% :</p>{" "}
+          <p>₹ {orderTotal() > 500 ? (orderTotal() * 18) / 100 : 0}</p>
         </div>
         <hr />
         <div>
           <p>Total :</p>
           <p>
             ₹{" "}
-            {getTotalAmount() > 500
-              ? Math.round(
-                  ((getTotalAmount() * 18) / 100 + getTotalAmount()) * 100
-                ) / 100
-              : getTotalAmount()}
+            {orderTotal() > 500
+              ? Math.round(((orderTotal() * 18) / 100 + orderTotal()) * 100) /
+                100
+              : orderTotal()}
           </p>
         </div>
       </div>
@@ -46,7 +44,7 @@ const Pay = () => {
       <h1 className="or">(OR)</h1>
       <div className="qr-container">
         <p>QR code</p>
-        <QRCodeSVG  value={upiURL} size={200} />,
+        <QRCodeSVG value={upiURL} size={200} />,
       </div>
     </div>
   );

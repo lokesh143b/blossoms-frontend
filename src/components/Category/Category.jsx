@@ -4,7 +4,7 @@ import { menu_list } from "../../assets/frontend_assets/assets";
 import { MyContext } from "../../context/MyContext";
 
 const Category = () => {
-  const{menu , setMenu} = useContext(MyContext)
+  const { menu, setMenu } = useContext(MyContext);
 
   return (
     <div className="category-container">
@@ -27,7 +27,6 @@ const Category = () => {
           </div>
         );
       })}
-
     </div>
   );
 };

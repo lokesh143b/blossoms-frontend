@@ -6,7 +6,10 @@ export const MyContext = createContext();
 export const MyContextProvider = ({ children }) => {
   const [menu, setMenu] = useState("All");
   const [cartItems, setCartItems] = useState({});
-  const [previousOrders, setPreviousOrders] = useState({});
+  const [screenMode, setScreenMode] = useState("dark-mode");
+  const [orders, setOrders] = useState([]);
+  const [user,setUser] = useState()
+
   const foodItems =
     menu !== "All"
       ? food_list.filter((item) => item.category === menu)
@@ -24,9 +27,9 @@ export const MyContextProvider = ({ children }) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
   };
 
-  const removeItemFromCart = (itemId) =>{
-    setCartItems((prev)=>({...prev,[itemId]:0}))
-  }
+  const removeItemFromCart = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: 0 }));
+  };
 
   const getTotalAmount = () => {
     let totalAmount = 0;
@@ -38,6 +41,14 @@ export const MyContextProvider = ({ children }) => {
     }
 
     return totalAmount;
+  };
+
+  const orderTotal = () => {
+    let total = 0;
+    for (let item of orders) {
+      total += item.price * item.quantity;
+    }
+    return total;
   };
 
   return (
@@ -53,6 +64,14 @@ export const MyContextProvider = ({ children }) => {
         removeItemFromCart,
         food_list,
         getTotalAmount,
+        orderTotal,
+        screenMode,
+        setScreenMode,
+        orders,
+        setOrders,
+        user,
+        setUser,
+       
       }}
     >
       {children}
