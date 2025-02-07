@@ -1,39 +1,93 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Cart.css";
 import { MyContext } from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { CiCircleMinus } from "react-icons/ci";
 import { CiCirclePlus } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 const Cart = () => {
   const {
     cartItems,
     setCartItems,
     addTocart,
+    getTotalAmount,
     removeFromCart,
     removeItemFromCart,
     food_list,
-    getTotalAmount,
-    setOrders,
+    url,
+    token,
   } = useContext(MyContext);
   const navigate = useNavigate();
+  const tableNo = Cookies.get("tableNo");
+  const [cartLoader, setCartLoader] = useState(false);
 
-  const onClickOrderNow = () => {
-    if (getTotalAmount() > 0) {
-      for(let [itemId,quantity] of Object.entries(cartItems)){
-        const filteredItems = food_list.filter((each) => each._id === itemId);
-        const updatedItem = { ...filteredItems[0], quantity };
-        setOrders((prev) => ([...prev , updatedItem]))
-        setCartItems({})
-      }
-      return navigate("/orders");
+  const onClickOrderNow = async () => {
+    if (!tableNo) {
+      toast.error(
+        "You can order food from Restuarent only by scanning QR code!"
+      );
+      setTimeout(() => navigate("/"), 3500); // Wait 3.5 seconds before redirecting
+      return;
     }
-    alert("No items in your cart");
+
+    if (getTotalAmount() > 0) {
+      try {
+        setCartLoader(true);
+        const response = await fetch(`${url}/order/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            tableNo: tableNo,
+            items: cartItems,
+          }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log(result);
+          // for (let [itemId, quantity] of Object.entries(cartItems)) {
+          //   const filteredItems = food_list.filter((each) => each._id === itemId);
+          //   const updatedItem = { ...filteredItems[0], quantity };
+          //   setOrders((prev) => [...prev, updatedItem]);
+          //   setCartItems({});
+          // }
+
+          toast.success("Order placed successfully!");
+          setCartLoader(false);
+
+          setTimeout(() => {
+            navigate("/orders");
+            setCartItems({});
+          }, 3500); // Wait 3.5 seconds before redirecting
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+        setCartLoader(false);
+      }
+    }
+    toast.error("No items in your cart");
   };
 
   return (
     <div className="cart-container">
+      <ToastContainer />
+      <div className="cart-loader">
+        {cartLoader ? (
+          <div className="loader-container">
+            <div className="circular-loader"></div>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
       {/* ------------cart items--------- */}
       {Object.values(cartItems).some((value) => value > 0) ? (
         <div className="cart-items">
@@ -52,7 +106,7 @@ const Cart = () => {
               return (
                 <div key={index}>
                   <div className="cart-items-title cart-items-item">
-                    <img src={item.image} alt="" />
+                    <img src={url + "/images/" + item.image} alt="" />
                     <p>{item.name}</p>
                     <p>₹ {item.price}</p>
                     {/* quantity */}

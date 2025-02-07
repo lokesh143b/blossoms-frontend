@@ -10,7 +10,17 @@
   padding-bottom: 30px;
   padding-left: 60px;
   padding-right: 60px;
-  color: #ffffff; 
+  color: #ffffff;
+}
+
+.footer-center p {
+  color: #ffffff;
+}
+.footer-container li {
+  color: #ffffff;
+}
+.footer-container h1 {
+  color: #ffffff;
 }
 @media (max-width: 768px) {
   .footer-container {

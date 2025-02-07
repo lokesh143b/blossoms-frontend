@@ -1,0 +1,171 @@
+.logins-container {
+  height: auto;
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .logins-container {
+  background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+}
+.light-mode .logins-container h1 {
+  color: #ffffff;
+}
+.light-mode .logins-container label {
+  color: #ffffff;
+}
+.light-mode .login-card p {
+  color: #ffffff;
+}
+.login-card {
+  border: 1px solid gray;
+  padding: 20px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
+}
+
+.login-card:hover {
+  transform: scale(1.02);
+}
+
+@media (min-width: 2200px) {
+  .logins-container {
+    height: 40vh;
+    width: 40vw;
+  }
+}
+@media (max-width: 1024px) and (min-width: 968px) {
+  .login-card {
+    height: 95%;
+  }
+}
+.login-card h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+.login-card div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-card div label {
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.login-card p {
+  font-size: 13px;
+  align-self: flex-start;
+  font-weight: 600;
+}
+.login-card span {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+.login-card span:hover {
+  color: #0056b3;
+}
+@media (max-width: 672px) {
+  .logins-container {
+    height: auto;
+    width: auto;
+  }
+  .login-card {
+    height: auto;
+  }
+  .login-card h1 {
+    font-size: 15px;
+  }
+  .login-card div label {
+    font-size: 12px;
+  }
+  .login-card p {
+    font-size: 10px;
+  }
+}
+
+.login-card div input {
+  padding: 10px;
+  border-radius: 6px;
+  outline: none;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.login-card div input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+.login-card div input::placeholder {
+  color: #aaa;
+  font-size: 14px;
+}
+.show-password {
+  align-self: flex-start;
+  display: inline-flex ;
+  gap: 5px;
+ 
+}
+.show-password label{
+  font-size: 13px;
+}
+
+.show-password input {
+  cursor: pointer;
+}
+
+.show-password label {
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+}
+.login-card button {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+.login-card button:hover {
+  background: linear-gradient(135deg, #0056b3, #004494);
+}
+
+@media (max-width: 568px) {
+  .login-card div input::placeholder {
+    font-size: 12px;
+  }
+}
+
+.close-pop-up {
+  display: none;
+}
+
+.error-msg {
+  color: red !important;
+  font-size: 14px;
+  font-weight: 600;
+}

@@ -4,10 +4,13 @@ import { MyContext } from "../../context/MyContext";
 import { QRCodeSVG } from "qrcode.react";
 
 const Pay = () => {
-  const { orderTotal } = useContext(MyContext);
+  const {  } = useContext(MyContext);
+  const orderTotal  = () => {
+    
+  }
 
   const UPI_ID = "6303300378@ybl";
-  const payeeName = "Blossoms Restuarent";
+  const payeeName = "Blossoms Restuarent"; 
   const transactionAmount =
     orderTotal() > 500
       ? Math.round(((orderTotal() * 18) / 100 + orderTotal()) * 100) / 100

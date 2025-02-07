@@ -9,23 +9,39 @@ import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
+import Cookies from 'js-cookie'
+
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // const [toggle, setToggle] = useState(false);
-  const { cartItems, screenMode, setScreenMode, user, setUser } =
-    useContext(MyContext);
+  const { cartItems, screenMode, setScreenMode } = useContext(MyContext);
+
+  const onClickLogout = () =>{
+    Cookies.remove("token")
+    Cookies.remove("tableNo")
+    Cookies.remove("tableId")
+    navigate("/login")
+  }
+
+  const onClickScreenMode = () => {
+    Cookies.get("screenMode") === "dark-mode" ? Cookies.set("screenMode" , "light-mode") : 
+    Cookies.set("screenMode" , "dark-mode")
+    setScreenMode((prev) =>
+      prev === "dark-mode" ? "light-mode" : "dark-mode"
+    )
+  }
 
   return (
     <div className="navbar-container">
       <h1 onClick={() => navigate("/")}>Blossoms.</h1>
       {/* -------------------navlinks------------------- */}
       <ul>
-        <NavLink to="/">
+        {/* home icon link */}
+        {/* <NavLink to="/">
           <li>
             <FaHome className="icon" /> <p>HOME</p>
           </li>
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/orders">
           <li>
             <IoFastFoodSharp className="icon" /> <p>ORDERS</p>
@@ -46,9 +62,7 @@ const Navbar = () => {
         {/* ----------screen mode------- */}
         <li
           onClick={() =>
-            setScreenMode((prev) =>
-              prev === "dark-mode" ? "light-mode" : "dark-mode"
-            )
+            onClickScreenMode()
           }
         >
           {screenMode === "dark-mode" ? (
@@ -57,46 +71,19 @@ const Navbar = () => {
             <MdDarkMode size={20} />
           )}
         </li>
-        {/* -----------hamberger icon---------- */}
-        {/* <li>
-          {toggle === false ? (
-            <GiHamburgerMenu onClick={() => setToggle(true)} size={20} />
-          ) : (
-            <RxCross1 onClick={() => setToggle(false)} size={20} />
-          )}
-        </li> */}
+        {/* -----------hamberger menu---------- */}
+        <li className={location.pathname === "/login" ? "" : "hamberger-container"}>
+          <GiHamburgerMenu size={20} />
+          <div className="drop-down-menu">
+            <h6 onClick={() => navigate("/my-profile")}>My Profile</h6>
+            <h6
+              onClick={onClickLogout}
+            >
+              Logout
+            </h6>
+          </div>
+        </li>
       </ul>
-      {/* ---------------logins-------------- */}
-      {/* {toggle ? (
-        <ul className="hamberger-logins">
-          <li
-            onClick={() => setUser("Admin")}
-            className={user === "Admin" ? "active" : ""}
-          >
-            Admin Login
-          </li>
-          <li
-            onClick={() => setUser("Staff")}
-            className={user === "Staff" ? "active" : ""}
-          >
-            Staff Login
-          </li>
-          <li
-            onClick={() => setUser("Pantry")}
-            className={user === "Pantry" ? "active" : ""}
-          >
-            Pantry Login
-          </li>
-          <li
-            onClick={() => setUser("Table")}
-            className={user === "Table" ? "active" : ""}
-          >
-            Table Login
-          </li>
-        </ul>
-      ) : (
-        ""
-      )} */}
     </div>
   );
 };

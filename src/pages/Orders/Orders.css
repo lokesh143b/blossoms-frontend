@@ -2,10 +2,20 @@
     min-height: 70vh;
     height: auto;
     width: 90vw;
-    color: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+  @media (max-width:562px) {
+    .order-container p{
+      font-size: 10px;
+    }
+  }
+ .order-container p{
+    color: #ffffff;
+  }
+  .light-mode .order-container p{
+    color: black;
   }
   .order-items {
     display: flex;
@@ -16,7 +26,7 @@
   }
   .order-items-title {
     display: grid;
-    grid-template-columns: 1.5fr 2fr 1.5fr 1.5fr 0.8fr ;
+    grid-template-columns: 1.5fr 2fr 2fr 1.5fr 0.8fr ;
     align-items: center;
   }
   .order-items-item {

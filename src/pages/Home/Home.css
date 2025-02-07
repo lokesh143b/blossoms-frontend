@@ -8,6 +8,10 @@
   color: #ffffff;
   width: 90%;
 }
+.light-mode .home-container p {
+  color: black;
+  font-weight: 500;
+}
 .home-heading {
   font-size: 50px;
   font-weight: 400;
@@ -83,4 +87,8 @@
   .home-container hr {
     margin-top: 20px;
   }
+}
+
+.table-no {
+  color: rgb(180, 15, 78);
 }

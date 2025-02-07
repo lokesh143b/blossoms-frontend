@@ -10,6 +10,8 @@ import menu_5 from "./menu_5.png";
 import menu_6 from "./menu_6.png";
 import menu_7 from "./menu_7.png";
 import menu_8 from "./menu_8.png";
+import menu_9 from "./menu_9.png";
+import menu_10 from "./menu_10.png"
 
 import food_1 from "./food_1.png";
 import food_2 from "./food_2.png";
@@ -59,6 +61,7 @@ import profile_icon from "./profile_icon.png";
 import bag_icon from "./bag_icon.png";
 import logout_icon from "./logout_icon.png";
 import parcel_icon from "./parcel_icon.png";
+import profile_pic from "./profile_pic.jpg"
 
 export const assets = {
   logo,
@@ -80,6 +83,7 @@ export const assets = {
   logout_icon,
   bag_icon,
   parcel_icon,
+  profile_pic
 };
 
 export const menu_list = [
@@ -96,7 +100,7 @@ export const menu_list = [
     menu_image: menu_3,
   },
   {
-    menu_name: "Sandwich",
+    menu_name: "Sandwitch",
     menu_image: menu_4,
   },
   {
@@ -116,22 +120,19 @@ export const menu_list = [
     menu_image: menu_8,
   },
   {
-    menu_name: "Noodles",
-    menu_image: menu_8,
+    menu_name: "Drinks",
+    menu_image: menu_9,
   },
   {
-    menu_name: "Noodles",
-    menu_image: menu_8,
+    menu_name: "Milkshakes",
+    menu_image: menu_10,
   },
-  {
-    menu_name: "Noodles",
-    menu_image: menu_8,
-  },
+  
 ];
 
 export const food_list = [
   {
-    _id: "1",
+    _id: "1", 
     name: "Greek salad",
     image: food_1,
     price: 120,
