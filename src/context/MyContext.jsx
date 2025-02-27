@@ -13,7 +13,8 @@ export const MyContextProvider = ({ children }) => {
   const [food_list, setFoodListItems] = useState([]);
   const [foodLoader, setFoodLoader] = useState(false);
   const token = Cookies.get("token");
-  const url = "http://localhost:4000";
+  const url = "https://blossoms-backend-app.onrender.com" ;
+  
   const navigate = useNavigate();
 
   const fetchFoodData = async () => {

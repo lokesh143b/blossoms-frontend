@@ -91,13 +91,14 @@ const Orders = () => {
           <br />
           <hr />
           {orders.map((item, index) => {
+            console.log(item)
             return (
               <div key={index}>
                 <div className="order-items-title order-items-item">
                   <img src={url + "/images/" + item.foodItem.image} alt="" />
                   <p>{item.foodItem.name}</p>
                   <p>
-                    ₹ {item.foodItem.price} x {item.orderItem.quantity} ={" "}
+                    ₹ {item.foodItem.price} x {item.orderItem.quantity} = 
                     {item.foodItem.price * item.orderItem.quantity}
                   </p>
                   <p>{item.orderItem.quantity}</p>

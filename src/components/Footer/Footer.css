@@ -12,6 +12,9 @@
   padding-right: 60px;
   color: #ffffff;
 }
+.footer-container p{
+  color: #ffffff !important; 
+}
 
 .footer-center p {
   color: #ffffff;
@@ -56,6 +59,9 @@
   font-weight: 600;
   font-size: 40px;
   cursor: pointer;
+}
+.footer-left p{
+  color: #ffffff;
 }
 @media (max-width: 768px) {
   .footer-container p {

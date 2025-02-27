@@ -28,8 +28,7 @@ const MyProfile = () => {
   const [changePasswordActive, setChangePasswordActive] = useState(false);
 
   const { url, token } = useContext(MyContext);
-  console.log(changePasswordDetails);
-  // Fetch user profile data when the component mounts
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -175,7 +174,7 @@ const MyProfile = () => {
 
   const onclickSetPassword = async () => {
     const { otp, newPassword, confirmPassword } = changePasswordDetails;
-  
+
     if (!otp || !newPassword || !confirmPassword) {
       setChangePasswordDetails((prev) => ({
         ...prev,
@@ -183,7 +182,7 @@ const MyProfile = () => {
       }));
       return;
     }
-  
+
     if (newPassword !== confirmPassword) {
       setChangePasswordDetails((prev) => ({
         ...prev,
@@ -191,44 +190,61 @@ const MyProfile = () => {
       }));
       return;
     }
-  
+
     setChangePasswordDetails((prev) => ({ ...prev, errMsg: "" }));
-  
+
     const data = { otp, newPassword };
-  
+
     try {
       const response = await fetch(`${url}/auth/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });
-  
+
       if (!response.ok) {
-        const errorMessage = await response.text();
-        throw new Error(errorMessage || "Failed to verify OTP");
+        const errorResult = await response.json();
+        console.error("Error response:", errorResult);
+        setChangePasswordDetails({
+          otp: "",
+          newPassword: "",
+          confirmPassword: "",
+          errMsg: "",
+        });
+        toast.error(errorResult.message || "An error occurred.");
+        setChangePasswordActive(false);
+        return;
       }
-  
+
       const result = await response.json();
+      console.log(result);
       toast.success(result.message);
-  
       setChangePasswordDetails({
         otp: "",
         newPassword: "",
         confirmPassword: "",
         errMsg: "",
       });
+      setChangePasswordActive(false);
     } catch (error) {
-      toast.error(error || "An error occurred. Please try again.");
+      console.error("Request failed:", error);
+      toast.error("An error occurred. Please try again.");
     }
   };
-  
+
   const profileRightBlock = () => {
     return (
       <ul className="profile-right">
-        <li onClick={clickOnChangePassword}>change password</li>
+        {changePasswordActive ? (
+          ""
+        ) : (
+          <li onClick={clickOnChangePassword}>change password</li>
+        )}
+
         {changePasswordActive ? (
           <div className="profile-right-set-password">
             <label htmlFor="Otp">OTP</label>
