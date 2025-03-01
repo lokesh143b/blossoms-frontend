@@ -15,15 +15,21 @@ const InitaiLogin = () => {
   const navigate = useNavigate();
   const [isTableExist, setIsTableExist] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [isLoaderActive, setIsLoaderActive] = useState(false);
 
   const { tableNo, tableId } = useParams();
+
+  Cookies.remove("tableNo");
+  Cookies.remove("tableId");
+  Cookies.remove("token");
+
   Cookies.set("tableNo", tableNo, { expires: 2 / 24 });
   Cookies.set("tableId", tableId, { expires: 2 / 24 });
 
   useEffect(() => {
     const getTablesData = async () => {
       try {
+        setIsLoaderActive(true);
         const response = await fetch(url + "/table/tables");
         if (response.ok) {
           const data = await response.json();
@@ -32,9 +38,11 @@ const InitaiLogin = () => {
               setIsTableExist(true);
             }
           }
+          setIsLoaderActive(false);
         }
       } catch (error) {
         console.error("Error fetching tables:", error);
+        setIsLoaderActive(false);
       }
     };
     getTablesData();
@@ -43,12 +51,14 @@ const InitaiLogin = () => {
   // ----------login handle --------------
   const handleLogin = async (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       setErrorMessage("Email and password are required");
       return;
     }
 
     try {
+      setIsLoaderActive(true);
       const response = await fetch(`${url}/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,12 +72,15 @@ const InitaiLogin = () => {
         console.log("Login Success Message:", result);
         setErrorMessage(result.message);
         Cookies.set("token", result.token, { expires: 2 / 24 });
+        setIsLoaderActive(false);
         navigate("/");
       } else {
+        setIsLoaderActive(false);
         setErrorMessage(result.message || "Failed to log in");
         console.log(result.message);
       }
     } catch (error) {
+      setIsLoaderActive(false);
       setErrorMessage("An error occurred. Please try again.");
       console.log(error);
     }
@@ -82,6 +95,7 @@ const InitaiLogin = () => {
     }
 
     try {
+      setIsLoaderActive(true);
       const response = await fetch(`${url}/user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,12 +107,16 @@ const InitaiLogin = () => {
         setUsername("");
         setEmail("");
         setPassword("");
+        setIsLoaderActive(false);
+
         console.log("Registration Success:", result);
         setErrorMessage(result.message);
       } else {
+        setIsLoaderActive(false);
         setErrorMessage(result.message || "Failed to register");
       }
     } catch (error) {
+      setIsLoaderActive(false);
       setErrorMessage("An error occurred. Please try again.");
     }
   };
@@ -111,6 +129,15 @@ const InitaiLogin = () => {
 
   return (
     <div className="logins-container">
+      {/* ----------- loader ----------- */}
+      {isLoaderActive ? (
+        <div className="loader-container">
+          <div className="circular-loader"></div>
+        </div>
+      ) : (
+        ""
+      )}
+
       {isTableExist ? (
         <p style={{ color: "red", fontWeight: "bold" }}>Table No : {tableNo}</p>
       ) : (

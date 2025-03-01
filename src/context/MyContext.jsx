@@ -13,8 +13,10 @@ export const MyContextProvider = ({ children }) => {
   const [food_list, setFoodListItems] = useState([]);
   const [foodLoader, setFoodLoader] = useState(false);
   const token = Cookies.get("token");
-  const url = "https://blossoms-backend-app.onrender.com" ;
-  
+
+  const url = "https://blossoms-backend-app.onrender.com";
+  // const url = "http://localhost:4000"
+
   const navigate = useNavigate();
 
   const fetchFoodData = async () => {
@@ -32,7 +34,7 @@ export const MyContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!token){
+    if (!token) {
       return;
     }
     fetchFoodData();
@@ -40,7 +42,7 @@ export const MyContextProvider = ({ children }) => {
 
   // Initially fetch the cart data
   useEffect(() => {
-    if (!token){
+    if (!token) {
       return;
     }
     const fetchCartData = async () => {
@@ -148,8 +150,6 @@ export const MyContextProvider = ({ children }) => {
     return totalAmount;
   };
 
-  
-
   return (
     <MyContext.Provider
       value={{
@@ -163,10 +163,10 @@ export const MyContextProvider = ({ children }) => {
         food_list,
         foodLoader,
         getTotalAmount,
-        
+
         screenMode,
         setScreenMode,
-        
+
         user,
         setUser,
         url,

@@ -13,6 +13,8 @@ const Logins = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoaderActive, setIsLoaderActive] = useState(false);
+
 
 
   // ----------login handle --------------
@@ -24,6 +26,7 @@ const Logins = () => {
     }
 
     try {
+      setIsLoaderActive(true)
       const response = await fetch(`${url}/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,12 +40,15 @@ const Logins = () => {
         console.log("Login Success Message:", result);
         setErrorMessage(result.message);
         Cookies.set("token", result.token, { expires: 2 / 24 });
+        setIsLoaderActive(false)
         navigate("/");
       } else {
+        setIsLoaderActive(false)
         setErrorMessage(result.message || "Failed to log in");
         console.log(result.message);
       }
     } catch (error) {
+      setIsLoaderActive(false)
       setErrorMessage("An error occurred. Please try again.");
       console.log(error);
     }
@@ -57,6 +63,7 @@ const Logins = () => {
     }
 
     try {
+      setIsLoaderActive(true)
       const response = await fetch(`${url}/user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -68,12 +75,16 @@ const Logins = () => {
         setUsername("");
         setEmail("");
         setPassword("");
+        setIsLoaderActive(false)
+        navigate(`${url}/login`)
         console.log("Registration Success:", result);
         setErrorMessage(result.message);
       } else {
+        setIsLoaderActive(false)
         setErrorMessage(result.message || "Failed to register");
       }
     } catch (error) {
+      setIsLoaderActive(false)
       setErrorMessage("An error occurred. Please try again.");
     }
   };
@@ -86,6 +97,16 @@ const Logins = () => {
 
   return (
     <div className="logins-container">
+
+      {/* ----------- loader ----------- */}
+      {isLoaderActive ? (
+        <div className="loader-container">
+          <div className="circular-loader"></div>
+        </div>
+      ) : (
+        ""
+      )}
+
       <form
         onSubmit={loginType === "login" ? handleLogin : handleSignUp}
         className="login-card"

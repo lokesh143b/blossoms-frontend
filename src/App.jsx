@@ -86,7 +86,7 @@ const App = () => {
 
         <Route
           path="/login/:tableNo/:tableId"
-          element={token ? <Navigate to="/" replace /> : <InitaiLogin />}
+          element={<InitaiLogin />}
         />
         <Route
           path="*"
