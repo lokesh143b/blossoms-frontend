@@ -99,14 +99,16 @@ const Logins = () => {
     <div className="logins-container">
 
       {/* ----------- loader ----------- */}
+      <div className="login-loader">
       {isLoaderActive ? (
-        <div className="loader-container">
-          <div className="circular-loader"></div>
+        <div className="login-loader-container">
+          <div className="login-circular-loader"></div>
         </div>
       ) : (
         ""
       )}
-
+      </div>
+  
       <form
         onSubmit={loginType === "login" ? handleLogin : handleSignUp}
         className="login-card"

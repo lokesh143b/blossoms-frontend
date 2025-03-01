@@ -79,6 +79,7 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 .circular-loader {
   display: inline-block;
@@ -91,6 +92,7 @@ ul {
   border-bottom: 5px solid yellow;
   border-radius: 50%; 
   animation: spin 1s linear infinite; 
+ 
 }
 
 

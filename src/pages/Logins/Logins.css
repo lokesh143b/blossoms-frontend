@@ -124,11 +124,10 @@
 
 .show-password {
   align-self: flex-start;
-  display: inline-flex ;
+  display: inline-flex;
   gap: 5px;
- 
 }
-.show-password label{
+.show-password label {
   font-size: 13px;
 }
 
@@ -172,4 +171,37 @@
   font-weight: 600;
 }
 
+.login-loader {
+  position: absolute;
+  top: 38%;
+  z-index: 10;
+}
+/* Container for the loader */
+.login-loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-circular-loader {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #007bff;
+  border-right: 5px solid #007bff;
 
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
