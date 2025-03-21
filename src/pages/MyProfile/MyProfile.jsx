@@ -159,7 +159,7 @@ const MyProfile = () => {
         },
       });
       if (response.ok) {
-        toast.success("OTP sent your Email");
+        toast.success("OTP sent your Email and Phone");
         const result = await response.json();
         setLoader(false);
         console.log(result);
@@ -196,7 +196,7 @@ const MyProfile = () => {
     const data = { otp, newPassword };
 
     try {
-      const response = await fetch(`${url}/auth/verify-otp`, {
+      const response = await fetch(`${url}/auth//verify-otp/password-change`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

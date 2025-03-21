@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
@@ -12,29 +12,9 @@ import ProtectedRoute from "./protectedRoutes/ProtectedRoute";
 import NotFound from "./components/NotFound/NotFound";
 import InitaiLogin from "./pages/InitialLogin/InitialLogin";
 import MyProfile from "./pages/MyProfile/MyProfile";
+import Verify from "./pages/Verify/Verify";
 
 const App = () => {
-  
-    /* this is used to loacte the homepage after every refresh */
-  
-  // useEffect(() => {
-  //   if(window.location.pathname === "/login"){
-  //     return
-  //   }
-  //   else {
-  //     window.location.href = '/'
-  //   }
-  // }, []);
-
-  {
-    /* this is used to loacte the homepage after every refresh */
-  }
-  // window.onload = () => {
-  //   if (window.location.pathname !== "/") {
-  //     window.location.href = "/";
-  //   }
-  // };
-
   const { screenMode, token } = useContext(MyContext);
 
   return (
@@ -79,15 +59,13 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/login"
           element={token ? <Navigate to="/" replace /> : <Logins />}
         />
 
-        <Route
-          path="/login/:tableNo/:tableId"
-          element={<InitaiLogin />}
-        />
+        <Route path="/login/:tableNo/:tableId" element={<InitaiLogin />} />
         <Route
           path="*"
           element={
@@ -104,6 +82,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/verify" element={<Verify/>} />
       </Routes>
       <Footer />
     </div>

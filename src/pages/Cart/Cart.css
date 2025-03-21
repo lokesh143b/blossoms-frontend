@@ -73,6 +73,10 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.cart-total button:disabled{
+  background-color: rgb(200, 124, 107);
+  cursor: none;
+}
 .cart-promocode {
   flex: 1;
   display: flex;
@@ -123,6 +127,7 @@
   font-size: 15px;
   cursor: pointer;
 }
+
 @media (max-width: 1283px) {
   .cart-promocode p {
     font-size: 15px;

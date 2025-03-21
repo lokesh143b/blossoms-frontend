@@ -38,7 +38,6 @@ const Orders = () => {
           GST: result.tableBill.GST,
           totalAmount: result.tableBill.totalAmount,
         }));
-        console.log(result);
       } else {
         console.log("server error");
         setOrderLoader(false);
@@ -76,6 +75,32 @@ const Orders = () => {
     }
   };
 
+  const onclickGenerateBill = async () => {
+    try {
+      setOrderLoader(true);
+      const response = await fetch(url + "/table/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tableId,orders }),
+      });
+      console.log(url)
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result)
+        const {session_url} = result
+        window.location.replace(session_url)
+      } else {
+        console.log("server error");
+        setOrderLoader(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setOrderLoader(false);
+    }
+  }
+
   return (
     <div className="order-container">
       {/* ------------cart items--------- */}
@@ -91,7 +116,6 @@ const Orders = () => {
           <br />
           <hr />
           {orders.map((item, index) => {
-            console.log(item)
             return (
               <div key={index}>
                 <div className="order-items-title order-items-item">
@@ -129,24 +153,20 @@ const Orders = () => {
           <h1>Order Totals</h1>
           <div className="order-total-details">
             <p>Subtotal</p>
-            <p>₹ {tableBill.total}</p>
+            <p>₹ {Math.floor(tableBill.total)}</p>
           </div>
           <hr />
           <div className="order-total-details">
             <p>GST {tableBill.total > 500 ? 18 : 0}%</p>
-            <p>₹ {tableBill.GST}</p>
+            <p>₹ {Math.floor(tableBill.GST)}</p>
           </div>
           <hr />
           <div className="order-total-details">
             <p>Total</p>
-            <p>₹ {tableBill.totalAmount}</p>
+            <p>₹ {Math.floor(tableBill.totalAmount)}</p>
           </div>
           <button
-            onClick={() =>
-              orderTotal() > 0
-                ? navigate("/pay")
-                : alert("No items in your order")
-            }
+            onClick={onclickGenerateBill}
           >
             GENERATE BILL
           </button>

@@ -60,12 +60,13 @@ const Cart = () => {
           // }
 
           toast.success("Order placed successfully!");
-          setCartLoader(false);
 
           setTimeout(() => {
             navigate("/orders");
             setCartItems({});
+            setCartLoader(false);
           }, 3500); // Wait 3.5 seconds before redirecting
+
           return;
         }
       } catch (error) {
@@ -167,7 +168,9 @@ const Cart = () => {
                 : getTotalAmount()}
             </p>
           </div>
-          <button onClick={onClickOrderNow}>ORDER NOW</button>
+          <button disabled={cartLoader} onClick={onClickOrderNow}>
+            {cartLoader ? "Loading..." : "ORDER NOW"}
+          </button>
         </div>
         {/* ---------promo code-------- */}
         <div className="cart-promocode">
