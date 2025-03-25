@@ -73,6 +73,9 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.cart-total button:hover{
+  background-color: rgb(152, 35, 14);
+}
 .cart-total button:disabled{
   background-color: rgb(200, 124, 107);
   cursor: none;

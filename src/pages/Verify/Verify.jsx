@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { MyContext } from "../../context/MyContext";
 
 const Verify = () => {
-  const { url } = useContext(MyContext);
+  const { url ,token} = useContext(MyContext);
   const [searchParams] = useSearchParams();
   const success = searchParams.get("success") === "true"; // Convert to boolean
   const tableId = searchParams.get("tableId");
@@ -18,6 +18,7 @@ const Verify = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ success, tableId }),
         });

@@ -163,10 +163,8 @@ export const MyContextProvider = ({ children }) => {
         food_list,
         foodLoader,
         getTotalAmount,
-
         screenMode,
         setScreenMode,
-
         user,
         setUser,
         url,

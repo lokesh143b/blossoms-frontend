@@ -67,6 +67,13 @@
     border-radius: 4px;
     cursor: pointer;
   }
+  .order-total button:hover{
+    background-color: rgb(152, 35, 14);
+  }
+  .order-total button:disabled{
+    background-color: rgb(200, 124, 107);
+    cursor: none;
+  }
   .order-promocode {
     flex: 1;
     display: flex;
@@ -164,4 +171,10 @@
       font-size: 15px;
       margin: 50px 0px;
     }
+  }
+
+  .order-loader{
+    position: absolute;
+    left: 50%;
+    top: 40%;
   }
