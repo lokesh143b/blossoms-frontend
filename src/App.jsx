@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound/NotFound";
 import InitaiLogin from "./pages/InitialLogin/InitialLogin";
 import MyProfile from "./pages/MyProfile/MyProfile";
 import Verify from "./pages/Verify/Verify";
+import MyOrders from "./pages/MyOrders/MyOrders";
 
 const App = () => {
   const { screenMode, token } = useContext(MyContext);
@@ -82,10 +83,27 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/verify" element={<ProtectedRoute>
+        <Route
+          path="/verify"
+          element={
+            <ProtectedRoute>
               <Verify />
-            </ProtectedRoute>} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ------------ my orders ------------ */}
+
+        <Route
+          path="/my-orders"
+          element={
+            <ProtectedRoute>
+              <MyOrders />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
+
       <Footer />
     </div>
   );

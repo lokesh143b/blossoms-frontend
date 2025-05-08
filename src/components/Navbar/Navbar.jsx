@@ -76,11 +76,13 @@ const Navbar = () => {
           <GiHamburgerMenu size={20} />
           <div className="drop-down-menu">
             <h6 onClick={() => navigate("/my-profile")}>My Profile</h6>
+            <h6 onClick={() => navigate("/my-orders")}>My orders</h6>
             <h6
               onClick={onClickLogout}
             >
               Logout
             </h6>
+            
           </div>
         </li>
       </ul>
